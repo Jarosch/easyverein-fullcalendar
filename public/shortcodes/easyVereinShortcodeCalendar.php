@@ -62,6 +62,104 @@ function easyVerein_printCalendar($atts = [])
         $calendarData = easyVereinAPIRequest('event', '{id,name,start,end,allDay,description,locationName}&ordering=start&start__gte=' . date("Y-m-d H:i:s.u") . '&calendar=' . $easyVerein_calendar_atts['id'] . $isPublicParam . '&deleted=false&limit=' . $count);
         $organizationData = easyVereinAPIRequest('organization', '{name,short}');
         $organizationShort = isset($organizationData['data']['results'][0]['short']) ? $organizationData['data']['results'][0]['short'] : 'Verein';
+		
+		// Rearranging timezone setup earlier as already important for building Fullcalendar
+		$timezone = get_option('timezone_string');
+        if (empty($timezone)) {
+			$gmt_offset = get_option('gmt_offset');
+			if ($gmt_offset == 0) {
+				$timezone = 'UTC';
+			} else {
+				$timezone = timezone_name_from_abbr('', $gmt_offset * 3600, 0);
+				if ($timezone === false)
+					$timezone = 'UTC';
+			}
+		}
+		date_default_timezone_set($timezone);
+		
+		// Building FullCalendar
+		
+		$html .= "\n";
+		$html .= "<link rel='stylesheet' href='https://unpkg.com/tippy.js@6/animations/scale.css'/>\n";
+		$html .= "<script src='https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js'></script>";
+		$html .= "<script src='https://cdn.jsdelivr.net/npm/moment-timezone@0.5.40/builds/moment-timezone-with-data.min.js'></script>";
+  	  	$html .= "<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>\n";
+		$html .= "<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales-all.global.min.js'></script>";
+		$html .= "<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment-timezone@6.1.15/index.global.min.js'></script>";
+		$html .= "<script src='https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js'></script>";
+		$html .= "<script src='https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js'></script>";
+   		$html .= "<script>\n";
+
+		$html .= "document.addEventListener('DOMContentLoaded', function() {\n";
+        $html .= "	var calendarEl = document.getElementById('calendar');\n";
+        $html .= "	var calendar = new FullCalendar.Calendar(calendarEl, {\n";
+  		$html .= "		initialView: 'multiMonthFourMonth',\n";
+		$html .= "		timeZone: 'Europe/Berlin',\n";
+		$html .= "		locale: 'de',\n";
+		$html .= "		nextDayThreshold: '07:00:00',\n";
+  		$html .= "		views: {\n";
+		$html .= "			multiMonthFourMonth: {\n";
+      	$html .= "			type: 'multiMonth',\n";
+      	$html .= "			duration: { months: 3 }\n";
+		$html .= "		}},\n";
+		$html .= "		eventDidMount: function(info) {\n";
+		$html .= "			var tooltip = new tippy(info.el, {\n";
+		$html .= "				content: info.event.extendedProps.description,\n";
+		$html .= "			});\n";
+      	$html .= "		},\n";
+		$html .= "		events : [\n";
+
+		
+		$i = 0;
+		$last_key = count($calendarData['data']['results']);
+
+		foreach ($calendarData['data']['results'] as $c) {
+			
+			
+			if ($i == $last_key) {
+				
+				// if last element then string should end without comma
+				
+				if (date('H:i:s', strtotime($c['start'])) == "00:00:00") {
+					
+					/* When working with all-day events, it seems that Fullcalendar doesn't show the duration properly when the events lasts longer than one day.
+					It becomes necessary to work the 'nextDayThreshold' param within the Fullcalendar object and to define the start time greater than 00:00:00. 
+					*/
+					$html .= "{ start: \"".date('Y-m-d', strtotime($c['start']))."T08:00:00\"";
+				} 
+				else {
+					$html .= "{ start: \"".date('Y-m-d', strtotime($c['start']))."T".date('H:i:s', strtotime($c['start']))."\"";
+				}
+
+				$html .= ", end: \"". date('Y-m-d', strtotime($c['end']))."T".date('H:i:s', strtotime($c['end']))."\"";
+				$html .= ", description: \"".$c['name']."\" }\n";
+				
+			} else {
+				
+				if (date('H:i:s', strtotime($c['start'])) == "00:00:00") {
+					// 
+					$html .= "{ start: \"".date('Y-m-d', strtotime($c['start']))."T08:00:00\"";
+				} 
+				else {
+					$html .= "{ start: \"".date('Y-m-d', strtotime($c['start']))."T".date('H:i:s', strtotime($c['start']))."\"";
+				}
+				
+				$html .= ", end: \"". date('Y-m-d', strtotime($c['end']))."T".date('H:i:s', strtotime($c['end']))."\"";
+				$html .= ", description: \"".$c['name']."\" },\n";
+			}
+			
+	
+			$i++;
+		}
+
+		$html .= "]\n";
+		$html .= "});\n";
+
+    	$html .= "calendar.render();\n";
+    	$html .= "});\n";
+		$html .= "</script>\n";
+		$html .= "<div id='calendar' style='min-width: 90%; max-height: 600px;'></div>";
+		
         // Build response
         $html .= '<div class="easyVerein_calendar">';
         if ($calendarData['data']['count'] == 0) {
@@ -69,18 +167,7 @@ function easyVerein_printCalendar($atts = [])
             $html .= '<p class="easyVerein_calendar_event_title"><b>Derzeit gibt es keine Termine</b></p><div>';
             $html .= '</div>';
         } else {
-            $timezone = get_option('timezone_string');
-            if (empty($timezone)) {
-                $gmt_offset = get_option('gmt_offset');
-                if ($gmt_offset == 0) {
-                    $timezone = 'UTC';
-                } else {
-                    $timezone = timezone_name_from_abbr('', $gmt_offset * 3600, 0);
-                    if ($timezone === false)
-                        $timezone = 'UTC';
-                }
-            }
-            date_default_timezone_set($timezone);
+
             foreach ($calendarData['data']['results'] as $c) {
                 $html .= '<div class="easyVerein_calendar_event" style="background-color:' . esc_attr(isset($userSettings['easyVerein_calendar_background_color']) ? $userSettings['easyVerein_calendar_background_color'] : '#23985D') . '; color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . '; border-color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . ';">';
                 $html .= '<p class="easyVerein_calendar_event_title"><b>' . $c['name'] . '</b></p>';

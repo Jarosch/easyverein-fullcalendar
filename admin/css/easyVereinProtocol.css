@@ -1,0 +1,36 @@
+/************************************
+* Protocol                          *
+************************************/
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol form {
+    width: 100%;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol form .easyVerein_protocol_colorpicker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol form .easyVerein_protocol_colorpicker .easyVerein_protocol_colorpicker_item {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol form .easyVerein_protocol_colorpicker .easyVerein_protocol_colorpicker_item p {
+    margin: 5px 0;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper #easyVerein_protocol form .easyVerein_protocol_colorpicker .easyVerein_protocol_colorpicker_item input {
+    width: 50%;
+}
+  

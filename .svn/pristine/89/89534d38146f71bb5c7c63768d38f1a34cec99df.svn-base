@@ -1,0 +1,24 @@
+/************************************
+* Calendar                          *
+************************************/
+.easyVerein_calendar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.easyVerein_calendar .easyVerein_calendar_event {
+    width: 100%;
+    padding: 25px;
+    border-bottom: solid 2px;
+}
+
+.easyVerein_calendar .easyVerein_calendar_event p {
+    margin: 5px;
+}
+
+.easyVerein_calendar .easyVerein_calendar_event p.easyVerein_calendar_event_title {
+    font-size: 1.5rem;
+}

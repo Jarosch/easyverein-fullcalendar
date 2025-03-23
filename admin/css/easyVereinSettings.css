@@ -1,0 +1,175 @@
+@import url(easyVereinMemberList.css);
+@import url(easyVereinCalendar.css);
+@import url(easyVereinProtocol.css);
+@import url(easyVereinGroups.css);
+@import url(easyVereinLoginForm.css);
+@import url(easyVereinSSOButtons.css);
+
+
+/************************************
+* Base                              *
+************************************/
+#wpcontent {
+    overflow: hidden;
+}
+
+/************************************
+* Wrapper                           *
+************************************/
+.easyVerein {
+    width: 100%;
+    overflow: hidden;
+    color: #000000;
+}
+
+/************************************
+* Global                            *
+************************************/
+.easyVerein .easyVerein_label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: lighter;
+}
+
+.easyVerein .easyVerein_label.easyVerein_success {
+    background-color: #23985d;
+    font-weight: bold;
+}
+
+.easyVerein .easyVerein_label.easyVerein_error {
+    background-color: red;
+    font-weight: bold;
+}
+
+.easyVerein_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.easyVerein_left {
+    width: 74%;
+}
+
+.easyVerein_right {
+    width: 24%;
+}
+
+
+/************************************
+* Header                            *
+************************************/
+.easyVerein .easyVerein_header {
+    min-height: 250px;
+    position: absolute;
+    transform: rotate(-1deg);
+    left: 0;
+    right: 0;
+    margin-left: -25px;
+    width: 103%;
+    margin-top: -20px;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #23985d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.easyVerein .easyVerein_header h1 {
+    font-size: 5em;
+    font-weight: lighter;
+    color: #FFFFFF;
+    margin: 20px;
+}
+
+.easyVerein .easyVerein_header h1 .bold_text {
+    font-weight: bold;
+}
+
+.easyVerein .easyVerein_header h2 {
+    font-size: 3em;
+    color: #FFFFFF;
+    margin: 20px;
+}
+
+
+/************************************
+* Content                           *
+************************************/
+.easyVerein .easyVerein_content {
+    margin-top: 270px;
+}
+
+.easyVerein .easyVerein_content hr {
+    border-top: 1px solid #8a8a8a;
+}
+
+.easyVerein .easyVerein_content .easyVerein_code {
+    background-color: #e7e7e7;
+    margin: 5px 0;
+    padding: 15px;
+}
+
+.easyVerein .easyVerein_content .easyVerein_code code {
+    font-weight: bold;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper {
+    width: 96%;
+    padding: 25px;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper .easyVerein_headline {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper .easyVerein_button {
+    width: 100%;
+    height: 40px;
+    background-color: #23985d;
+    border-radius: #23985d;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper .easyVerein_button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/************************************
+* Accordion                         *
+************************************/
+.easyVerein_accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+  
+.easyVerein_accordion:hover, .easyVerein_accordion.active {
+    background-color: #ccc;
+}
+  
+.easyVerein_accordion_panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}

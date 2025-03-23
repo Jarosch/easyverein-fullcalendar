@@ -1,0 +1,128 @@
+/************************************
+* Sortable list                     *
+************************************/
+#easyVerein_syncUsernames_checkbox {
+    margin: 0;
+    width: 16px;
+    background-color: #23985d;
+    color: #FFFFFF
+}
+
+#easyVerein_sortable_memberlist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+#easyVerein_sortable_memberlist li {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1.05rem;
+    background-color: #23985d;
+    color: #FFFFFF;
+}
+
+#easyVerein_sortable_memberlist li:hover {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1.05rem;
+    background-color: #23985d;
+    color: #FFFFFF;
+    cursor: grab;
+}
+
+
+#easyVerein_sortable_memberlist li input {
+    width: 16px;
+    height: 16px;
+    margin: inherit;
+    cursor: pointer;
+}
+
+#easyVerein_sortable_memberlist li .easyVerein_sortIcon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    color: #f5f5f5;
+}
+
+.easyVerein_sortable_memberlist_colorpicker {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.easyVerein_sortable_memberlist_colorpicker .easyVerein_sortable_memberlist_colorpicker_item {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.easyVerein_sortable_memberlist_colorpicker .easyVerein_sortable_memberlist_colorpicker_item p {
+    margin: 5px 0;
+}
+
+.easyVerein .easyVerein_content .easyVerein_content_wrapper .easyVerein_sortable_memberlist_colorpicker .easyVerein_sortable_memberlist_colorpicker_item input {
+    width: 50%;
+}
+
+.easyVerein_switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.easyVerein_switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.easyVerein_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.easyVerein_slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .easyVerein_slider {
+    background-color: #23985d;
+}
+
+input:focus + .easyVerein_slider {
+    box-shadow: 0 0 1px #23985d;
+}
+
+input:checked + .easyVerein_slider:before {
+    -webkit-transform: translateX(15px);
+    -ms-transform: translateX(15px);
+    transform: translateX(15px);
+}
+
+.easyVerein_slider.round {
+    border-radius: 34px;
+}
+
+.easyVerein_slider.round:before {
+    border-radius: 50%;
+}

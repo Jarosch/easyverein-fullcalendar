@@ -1,0 +1,20 @@
+.easyVerein_login {
+    width: 100%;
+}
+
+.easyVerein_login form {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.easyVerein_login input[type="text"], .easyVerein_login input[type="password"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.easyVerein_login input[type="submit"] {
+    width: 100%;
+    margin: 10px 0;
+    background-color: #23985D;
+}

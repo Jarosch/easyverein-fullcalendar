@@ -1,0 +1,13 @@
+#easyVerein_groups form {
+    width: 100%;
+}
+
+#easyVerein_groups form label {
+    display: block;
+}
+
+#easyVerein_groups form select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+

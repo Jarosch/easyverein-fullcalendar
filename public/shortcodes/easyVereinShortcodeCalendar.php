@@ -169,7 +169,7 @@ function easyVerein_printCalendar($atts = [])
         } else {
 
             foreach ($calendarData['data']['results'] as $c) {
-                $html .= '<div class="easyVerein_calendar_event" style="background-color:' . esc_attr(isset($userSettings['easyVerein_calendar_background_color']) ? $userSettings['easyVerein_calendar_background_color'] : '#23985D') . '; color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . '; border-color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . ';">';
+                $html .= '<div class="easyVerein_calendar_event" style="margin-bottom: 25px; background-color:' . esc_attr(isset($userSettings['easyVerein_calendar_background_color']) ? $userSettings['easyVerein_calendar_background_color'] : '#23985D') . '; color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . '; border-color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . ';">';
                 $html .= '<p class="easyVerein_calendar_event_title"><b>' . $c['name'] . '</b></p>';
                 if (date('d.m.Y', strtotime($c['start'])) == date('d.m.Y', strtotime($c['end']))) {
                     if ($c['allDay']) {

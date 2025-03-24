@@ -5,6 +5,8 @@ This fork improves the visibiity of events for the upcoming three months. That's
 
 ![image](https://github.com/user-attachments/assets/3bad7049-4f3c-4bbd-9a5a-0bfa2adfd46c)
 
+Feel free to try it out by visiting our community at following URL: https://www.kgv-werne.de/vermietungen/
+
 For the moment, this implementation is made for the public calendars, as there was no necessity for myself to make it also in private calendars available.
 If somebody may feel the necessity to implement it for private calendars, feel free to reach out to me or to do it by yourself. 
 

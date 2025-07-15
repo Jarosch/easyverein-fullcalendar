@@ -162,7 +162,7 @@ function easyVerein_printCalendar($atts = [])
 		
         // Build response
         $html .= '<div class="easyVerein_calendar">';
-        if ($calendarData['data']['count'] == 0) {
+        if (count($calendarData['data']['results']) == 0) {
             $html .= '<div class="easyVerein_calendar_event" style="background-color:' . esc_attr(isset($userSettings['easyVerein_calendar_background_color']) ? $userSettings['easyVerein_calendar_background_color'] : '#23985D') . '; color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . '; border-color:' . esc_attr(isset($userSettings['easyVerein_calendar_text_color']) ? $userSettings['easyVerein_calendar_text_color'] : '#FFFFFF') . ';">';
             $html .= '<p class="easyVerein_calendar_event_title"><b>Derzeit gibt es keine Termine</b></p><div>';
             $html .= '</div>';
